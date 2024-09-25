@@ -97,6 +97,13 @@ create_analysis <- function(design,
           level = loa[["level"]]
         ))
       }
+      if (loa[["analysis_type"]] == "total") {
+        return(create_analysis_total(design,
+                                      group_var = loa[["group_var"]],
+                                      analysis_var = loa[["analysis_var"]],
+                                      level = loa[["level"]]
+        ))
+      }
       if (loa[["analysis_type"]] == "prop_select_one") {
         return(create_analysis_prop_select_one(design,
           group_var = loa[["group_var"]],
@@ -166,8 +173,8 @@ create_loa <- function(design,
                        group_var = NULL,
                        sm_separator = ".") {
   loa_dictionary <- data.frame(
-    type = c("character", "double", "double", "logical", "integer", "integer"),
-    analysis_type = c("prop_select_one", "mean", "median", "prop_select_multiple", "mean", "median")
+    type = c("character", "double", "double", "double", "logical", "integer", "integer", "integer"),
+    analysis_type = c("prop_select_one", "mean", "median", "total", "prop_select_multiple", "mean", "median", "total")
   )
   cols_to_remove <- c("start", "end", "today", "uuid")
 
@@ -221,7 +228,7 @@ create_loa <- function(design,
 #'   loa = analysistools_MSNA_template_loa
 #' )
 check_loa <- function(loa, design) {
-  analysis_type_dictionary <- c("prop_select_one", "prop_select_multiple", "mean", "median", "ratio")
+  analysis_type_dictionary <- c("prop_select_one", "prop_select_multiple", "mean", "median", "ratio", "total")
 
   # check if analysis type exists
   if (!"analysis_type" %in% names(loa)) {
