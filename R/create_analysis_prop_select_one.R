@@ -99,7 +99,7 @@ create_analysis_prop_select_one <- function(design, group_var = NA, analysis_var
   results <- adding_analysis_key(results = results)
   # re-arranging the columns
   results <- results %>%
-    arranging_results_columns()
+    arranging_results_columns() %>% .[order(-.[["stat"]]),]
 
   return(results)
 }

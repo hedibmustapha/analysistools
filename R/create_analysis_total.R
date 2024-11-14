@@ -74,5 +74,5 @@ create_analysis_total <- function(design, group_var = NA, analysis_var, level = 
   results <- adding_analysis_key(results = results)
   # re-arranging the columns
   results %>%
-    arranging_results_columns()
+    arranging_results_columns() %>% .[order(-.[["stat"]]),]
 }

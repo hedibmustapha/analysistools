@@ -128,4 +128,6 @@ create_analysis_prop_select_multiple <- function(design, group_var = NA, analysi
   # re-arranging the columns
   results %>%
     arranging_results_columns()
+  results <- head(results, -1) %>% arrange(desc(stat))
+  return(results)
 }
